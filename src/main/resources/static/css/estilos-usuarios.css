@@ -1,0 +1,20 @@
+body {
+    background: linear-gradient(135deg, #d3e8ff, #f8fbff);
+}
+
+h1 {
+    letter-spacing: 1px;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.table th {
+    font-size: 1.1rem;
+}
+
+.btn-lg {
+    font-size: 1.1rem;
+    padding: 12px 18px;
+}

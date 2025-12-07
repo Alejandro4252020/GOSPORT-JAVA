@@ -1,0 +1,45 @@
+body {
+    background: linear-gradient(180deg, #1266cec5, #464e58);
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    border-radius: 15px !important;
+}
+
+/* Botón primario (ADMIN) */
+.btn-primary {
+    background-color: #757e8b;
+    background-color: #757e8b;
+    border-color: #757e8bbb;
+}
+.btn-primary:hover {
+    background-color: #09090a;
+    border-color: #0b0c0e;
+}
+
+/* Botón secundario (USER) */
+.btn-secondary {
+    background-color: #5ea0ff;
+    border-color: #5ea0ff;
+}
+.btn-secondary:hover {
+    background-color: #3c7bd6;
+    border-color: #3c7bd6;
+}
+
+/* Botón salir */
+.btn-danger {
+    background-color: #757e8b;
+    border-color: #757e8b;
+}
+.btn-danger:hover {
+    background-color: s#757e8b;
+}
+
+/* Mensaje éxito */
+.alert-success {
+    font-weight: bold;
+    border-radius: 10px;
+}

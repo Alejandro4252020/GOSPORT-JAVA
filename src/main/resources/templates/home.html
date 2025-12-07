@@ -2,45 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8" />
     <title>Inicio</title>
+
+    <!-- BOOTSTRAP 5 -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
+
+    <!-- TU CSS PERSONAL -->
+    <link rel="stylesheet" th:href="@{/css/estilos-azules.css}">
 </head>
 
 <body>
-    <h2>Bienvenido al sistema</h2>
 
-    <p>Tu rol es: <span th:text="${rol}"></span></p>
+    <!-- CONTENIDO CENTRADO -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
 
-    <nav>
-        <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-            <a th:href="@{/usuarios}">Ver usuarios</a>
+        <div class="card shadow-lg border-0 p-5"
+             style="max-width: 600px; width: 100%; min-height: 550px;">
+
+            <h2 class="text-center mb-4 text-dark fw-bold">
+                Bienvenido a gosport
+            </h2>
+
+            <p class="text-center fs-5">
+                Tu rol es: <span class="fw-semibold" th:text="${rol}"></span>
+            </p>
+
+            <nav class="d-flex flex-column gap-4 mt-5">
+
+                <!-- ADMIN -->
+                <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+
+                    <a class="btn btn-primary w-100 py-3 fs-5 mb-3" th:href="@{/usuarios}">
+                        Ver usuarios
+                    </a>
+
+                    <button type="submit" class="btn btn-danger w-100 py-3 fs-5">
+                        Cerrar sesión
+                    </button>
+
+                    <!-- MENSAJE RECUPERAR CONTRASEÑA -->
+                    <p class="text-center mt-3">
+                        <a href="/recuperar" class="text-decoration-none text-primary fw-semibold">
+                            ¿Olvidaste tu contraseña? Recupérala aquí
+                        </a>
+                    </p>
+
+                </div>
+
+            </nav>
         </div>
 
-        <!-- El Perfil "USER" solo podra modificar su perfil! -->
-        <div th:if="${#authorization.expression('hasRole(''USER'')')}">
-            <a th:href="@{/perfil}">Editar mi perfil</a>
-        </div>
+    </div>
 
-        <div id="mensajeExito" th:if="${param.actualizado}">
-            <p style="color:green;">¡Tu perfil ha sido actualizado correctamente!</p>
-        </div>
-
-
-        <br> <br>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">Cerrar sesión</button>
-        </form>
-
-    </nav>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         setTimeout(function () {
             const mensaje = document.getElementById("mensajeExito");
-            if (mensaje) {
-                mensaje.style.display = "none";
-            }
-        }, 4000); // 4 segundos
+            if (mensaje) mensaje.style.display = "none";
+        }, 4000);
     </script>
 
-</body> 
+</body>
 
 </html>
