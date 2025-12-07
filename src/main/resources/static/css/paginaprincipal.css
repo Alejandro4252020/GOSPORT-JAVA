@@ -1,0 +1,100 @@
+/* -----------------------------
+   Reset básico
+----------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* -----------------------------
+   Body
+----------------------------- */
+body {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #333333;
+    text-align: center;
+    padding-top: 70px; /* espacio para la barra */
+}
+
+/* -----------------------------
+   Barra superior (Navbar)
+----------------------------- */
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000; /* azul */
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    font-size: 1.8em;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* -----------------------------
+   Contenido principal
+----------------------------- */
+.main-content {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+/* -----------------------------
+   Botones y enlaces
+----------------------------- */
+a.button {
+    display: inline-block;
+    background-color: #16aa08;
+    color: white;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 10px 0;
+}
+
+a.button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* -----------------------------
+   Footer
+----------------------------- */
+footer {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666666;
+}
+/* Footer */
+/* Footer fijo abajo */
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 0.9em;
+}

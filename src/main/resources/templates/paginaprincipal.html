@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal - GoSports</title>
+    <link rel="stylesheet" href="/css/paginaprincipal.css">
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <div class="navbar">
+        <h1>GoSports</h1>
+        <a th:href="@{/login}" class="nav-link">Iniciar sesión</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <h2>Bienvenido a GoSports</h2>
+        <p>Que mas parceros, ¿preparados? </p>
+        
+        <a th:href="@{/login}" class="button">Iniciar sesión</a>
+    </div>
+
+    <footer>
+        <p>© 2025 GoSports - Sistema de gestión deportiva</p>
+    </footer>
+
+</body>
+</html>

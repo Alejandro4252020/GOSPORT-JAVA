@@ -1,0 +1,40 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Iniciar sesión</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form th:action="@{/login}" method="post">
+        <label for="username">Usuario:</label>
+        <input type="text" name="username" id="username" required />
+        <label for="password">Contraseña:</label>
+        <input type="password" name="password" id="password" required />
+        <button type="submit">Ingresar</button>
+    </form>
+
+    <div th:if="${param.error}">
+        <p style="color:red;">Usuario o contraseña incorrectos</p>
+    </div>
+
+    <div id="id_sesioncerrada" th:if="${param.logout}">
+        <p style="color:green;">Sesión cerrada correctamente</p>
+    </div>
+
+    <div id="id_sesioncerrada" th:if="${param.denied}">
+       <!--  <div class="alert alert-danger">  Aplicando bootstrap-->
+           <p style="color:red;"> Acceso denegado. No tienes permisos para ver esta página.</p>
+       <!-- </div>-->
+    </div>
+
+        <!--JavaScript: Desaparece el mensaje "id_sesioncerrada" a los 2 segundos -->
+        <script>
+        setTimeout(function () {
+            const mensaje = document.getElementById("id_sesioncerrada");
+            if (mensaje) {
+                mensaje.style.display = "none";
+            }
+        }, 2000); // 2 segundos
+    </script>
+</body>
+</html>
