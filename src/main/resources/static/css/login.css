@@ -1,0 +1,237 @@
+/* ===========================================
+   FONDO Y CONFIG BÁSICA
+=========================================== */
+body {
+    background: #f0f2f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Contenedor general */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    gap: 80px;
+    flex-wrap: wrap; /* hace que se adapte en móviles */
+}
+
+/* ===========================================
+   SECCIÓN DE TEXTO (estilo Facebook)
+=========================================== */
+.info-section {
+    width: 450px;
+}
+
+.brand-title {
+    color: #000000;
+    font-size: 55px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.brand-text {
+    font-size: 28px;
+    color: #1c1e21;
+    line-height: 34px;
+}
+
+/* ===========================================
+   LOGIN
+=========================================== */
+.login-container {
+    width: 350px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.logo-login {
+    width: 90px;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #dddfe2;
+    font-size: 16px;
+}
+
+/* Botón */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #000000;
+    color: white;
+    border: none;
+    font-size: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #333333;
+}
+
+/* Mensajes */
+.mensaje {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.error { background: #ffdddd; color: #c30000; }
+.success { background: #d7ffd7; color: #006600; }
+
+/* ===========================================
+   BARRA SUPERIOR (NAVBAR)
+=========================================== */
+.topbar {
+    width: 100%;
+    background: #000;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.topbar-content {
+    width: 90%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-title {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.topbar-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+.btn-volver {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #000000;
+    color: #ffffff !important;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+
+    .btn-volver:hover {
+        background: #333333;
+    }
+/* ===========================================
+   FOOTER
+=========================================== */
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* ===========================================
+   RESPONSIVE (MÓVILES Y TABLETS)
+=========================================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+    .brand-title {
+        font-size: 45px;
+    }
+    .brand-text {
+        font-size: 22px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+
+    .page-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding-top: 120px;
+    }
+
+    .info-section {
+        width: 100%;
+    }
+
+    .brand-title {
+        font-size: 40px;
+    }
+
+    .brand-text {
+        font-size: 20px;
+    }
+
+    .topbar-content {
+        padding: 0 20px;
+    }
+
+    .logo-title {
+        font-size: 22px;
+    }
+
+    .topbar-logo {
+        height: 35px;
+    }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+
+    .brand-title {
+        font-size: 32px;
+    }
+
+    .brand-text {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .logo-title {
+        font-size: 18px;
+    }
+
+    .topbar-logo {
+        height: 30px;
+    }
+
+    .topbar {
+        padding: 8px 0;
+    }
+    
+
+}

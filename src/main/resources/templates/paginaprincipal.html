@@ -4,26 +4,136 @@
     <meta charset="UTF-8">
     <title>Página Principal - GoSports</title>
     <link rel="stylesheet" href="/css/paginaprincipal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 
-    <!-- Barra superior -->
-    <div class="navbar">
-        <h1>GoSports</h1>
-        <a th:href="@{/login}" class="nav-link">Iniciar sesión</a>
-    </div>
+    <!-- BARRA SUPERIOR -->
+    <header class="topbar">
+        <div class="topbar-content">
+            <div class="logo-title">GoSports</div>
+            <img th:src="@{/img/icono.jpg}" alt="Logo Gosports" class="topbar-logo">
+        </div>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/login}">Iniciar Sesión</a>
+        </li>
+    </header>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <h2>Bienvenido a GoSports</h2>
-        <p>Que mas parceros, ¿preparados? </p>
+    <!-- Sección principal con imagen tipo banner -->
+        <section class="hero">
+            <img src="/img/deportesprinci.png" alt="Deportes GoSports">
         
-        <a th:href="@{/login}" class="button">Iniciar sesión</a>
+            <div class="hero-text">
+                <h2>Reserva tu cancha en segundos</h2>
+                <p>PASIÓN. JUEGO. VICTORIA.</p>
+            
+                <a th:href="@{/login}" class="btn-start">Empezar ahora</a>
+            </div>
+        </section>  
+        
+    <!-- SECCIÓN DE PLANES / TIPOS DE USUARIO -->
+<section class="planes-section">
+    <h2 class="planes-title">Elige tu tipo de usuario</h2>
+    <p class="planes-subtitle">GoSports se adapta a tus necesidades deportivas</p>
+
+    <div class="planes-container">
+
+        <!-- PLAN JUGADOR -->
+        <div class="plan-card">
+            <h3>Jugador</h3>
+            <p class="plan-desc">Reserva canchas fácilmente y juega cuando quieras.</p>
+            <ul>
+                <li> Reservas rápidas</li>
+                <li> Historial de partidos</li>
+                <li> Notificaciones y recordatorios</li>
+            </ul>
+            <a th:href="@{/registroJugador}" class="plan-btn">Registrarme</a>
+        </div>
+        <hr>
+        <!-- PLAN ADMINISTRADOR DE CANCHAS -->
+        <div class="plan-card">
+            <h3>Administrador de Canchas</h3>
+            <p class="plan-desc">Control total sobre horarios, reservas y disponibilidad.</p>
+            <ul>
+                <li> Panel de gestión</li>
+                <li> Control de pagos</li>
+                <li> Reportes y estadísticas</li>
+            </ul>
+            <a th:href="@{/registroAdmin}" class="plan-btn">Soy administrador</a>
+        </div>
     </div>
+    <br><br>
+</section>
+<section class="promo-blackfriday">
+    <img src="/img/black-friday-pagina-web.jpg" alt="Promoción Black Friday en GoSports" />
+</section>
+<section class="mision-vision-section">
+    <h2 class="mv-title">Nuestra Misión y Visión</h2>
+    
+
+    <div class="mv-container">
+
+        <!-- Misión -->
+        <div class="mv-card">
+            <h3>Misión</h3>
+            <p>
+                Facilitar la gestión y reserva de espacios deportivos mediante una plataforma innovadora, rápida y accesible,
+                mejorando la experiencia de jugadores, clubes y administradores.
+            </p>
+        </div>
+        <hr><hr>
+        <!-- Visión -->
+        <div class="mv-card">
+            <h3>Visión</h3>
+            <p>
+                Convertirnos en el sistema líder de gestión deportiva en Latinoamérica, conectando comunidades deportivas con
+                tecnología que inspire organización, competitividad y pasión por el deporte.
+            </p>
+        </div>
+
+    </div>
+</section>
+<section class="logos-section py-4">
+    <div id="carouselLogos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+        
+        <div class="carousel-inner d-flex align-items-center">
+
+            <!-- Thymeleaf: recorrer lista de logos -->
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center gap-4">
+                    <img th:src="@{/img/logosena1.png}" class="logo-item">
+                    <img th:src="@{/img/logo2.jpg}" class="logo-item">
+                    <img th:src="@{/img/logo3.png}" class="logo-item">
+                    <img th:src="@{/img/logo4.png}" class="logo-item">
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center gap-4">
+                    <img th:src="@{/img/logo5.jpg}" class="logo-item">
+                    <img th:src="@{/img/logo6.jpg}" class="logo-item">
+                    <img th:src="@{/img/logo7.png}" class="logo-item">
+                    <img th:src="@{/img/logo8.png}" class="logo-item">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<hr>
+<section class="collage-section">
+    <img src="/img/collage.jpg" alt="Collage" class="collage-img">
+</section>
+
+
+
 
     <footer>
         <p>© 2025 GoSports - Sistema de gestión deportiva</p>
     </footer>
 
 </body>
+
 </html>

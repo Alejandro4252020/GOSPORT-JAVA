@@ -12,89 +12,363 @@
    Body
 ----------------------------- */
 body {
-    background-color: #ffffff; /* Fondo blanco */
-    color: #333333;
+    background-color: #f0f2f5;
+    color: #333;
     text-align: center;
-    padding-top: 70px; /* espacio para la barra */
+    padding-top: 0;
 }
 
-/* -----------------------------
-   Barra superior (Navbar)
------------------------------ */
-.navbar {
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===========================================
+   BARRA SUPERIOR (NAVBAR)
+=========================================== */
+.topbar {
     width: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    justify-content: flex;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #000000; /* azul */
-    color: white;
-    padding: 15px 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.topbar-content {
+    width: 90%;
+    max-width: 1400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
+    padding-left: 20px; /* ← ESTE es el espaciado que te faltaba */
+    padding-right: 20px;
 }
 
-.navbar h1 {
-    font-size: 1.8em;
-}
-
-.navbar a {
+.logo-title {
     color: white;
-    text-decoration: none;
+    font-size: 30px;
     font-weight: bold;
-    margin-left: 15px;
 }
 
-.navbar a:hover {
-    text-decoration: underline;
+.topbar-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
 }
-
-/* -----------------------------
-   Contenido principal
------------------------------ */
-.main-content {
-    padding: 20px;
-}
-
-h2 {
-    font-size: 1.5em;
-    margin: 20px 0;
-}
-
-/* -----------------------------
-   Botones y enlaces
------------------------------ */
-a.button {
+.btn-volver {
     display: inline-block;
-    background-color: #16aa08;
-    color: white;
+    padding: 12px 25px;
+    background: #000000;
+    color: #ffffff !important;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
     text-decoration: none;
-    padding: 10px 25px;
-    border-radius: 25px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin: 10px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+
+/* ===========================================
+   BOTÓN INICIAR SESIÓN EN LA TOPBAR
+=========================================== */
+.topbar .nav-item {
+    list-style: none;
 }
 
-a.button:hover {
-    background-color: #0056b3;
+.topbar .nav-link {
+    background-color: #000;      /* Fondo negro */
+    color: #fff !important;      /* Texto blanco */
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 15px;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.topbar .nav-link:hover {
+    background-color: #0a0a0a;      /* Se invierte al pasar el mouse */
+    color: #f0f0f0 !important;
     transform: scale(1.05);
+}
+/* SECCIÓN DE PLANES */
+.planes-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9f9f9;
+}
+
+.planes-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.planes-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.planes-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.plan-card {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 300px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform .3s;
+    border: 2px solid #1b971b;
+    
+}
+.plan-card ul {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 30px;   /* <--- separa los puntos del borde */
+}
+
+
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.plan-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.plan-desc {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.plan-card ul {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.plan-card ul li {
+    margin: 8px 0;
+}
+
+.plan-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #000000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background .3s;
+}
+
+.plan-btn:hover {
+    background: #202020;
+}
+
+/* Tarjeta destacada */
+.plan-card.destacado {
+    border: 2px solid #1b971b;
+    transform: scale(1.05);
+}
+
+
+/* -----------------------------
+   HERO
+----------------------------- */
+.hero {
+    width: 100%;
+    height: 90vh;
+    position: relative;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+/* Imagen fondo */
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+    border-radius: 35px  ;
+    border-color: #000;
+}
+
+/* Texto centrado */
+.hero .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.90); /* más suave */
+}
+
+.hero .hero-text h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.92); /* alto contraste pero suave */
+}
+
+.hero .hero-text p {
+    font-size: 1.4rem;
+    margin: 15px 0 30px;
+    color: rgba(255, 255, 255, 0.70); /* más transparente */
+}
+
+/* Botón rojo */
+.btn-start {
+    background: #000000;
+    color: white;
+    padding: 14px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-start:hover {
+    background: #020202;
+    transform: scale(1.05);
+}
+/* MISION Y VISION */
+.mision-vision-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.mv-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: rgba(47, 172, 16, 0.842);
+}
+
+.mv-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.mv-card {
+    color:  rgba(47, 172, 16, 0.842);
+    width: 350px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(47, 172, 16, 0.842);
+    text-align: left;
+}
+
+.mv-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.mv-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+/*----------------------------------
+   SECCIÓN DE LOGO BLACK FRIDAY
+-----------------------------------*/   
+.promo-blackfriday img {
+    width: 100%;
+    max-width: 1200px;  /* o el ancho máximo que quieras */
+    height: auto;
+    display: block;
+    margin: 40px auto;  /* centra la imagen y agrega espacio arriba y abajo */
+    border-radius: 12px; /* opcional, bordes redondeados */
+    box-shadow: 0 4px 30px rgba(0,0,0,0.15); /* opcional, sombra sutil */
+}
+/*----------------------------------
+   SECCIÓN DE LOGOS DE MARCAS Y PATROCINIOS
+-----------------------------------*/   
+.logos-section {
+    background-color: #000000,#c4c1c1; /* azul suave similar al de tu imagen */
+    box-sizing: border-box;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.logo-item {
+    max-height: 130px;
+    opacity: 0.85;
+    transition: 0.3s;
+}
+
+.logo-item:hover {
+    opacity: 1;
+    transform: scale(1.10);
+}
+.collage-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.collage-img {
+    width: 100%;
+    display: block;
+    filter: brightness(0.75); /* oscurece ligeramente */
+}
+
+.collage-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* -----------------------------
    Footer
 ----------------------------- */
 footer {
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #666666;
-}
-/* Footer */
-/* Footer fijo abajo */
-footer {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #000;
+    color: #fff;
     padding: 15px 0;
     font-size: 0.9em;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* -----------------------------
+   RESPONSIVE
+----------------------------- */
+@media (max-width: 768px) {
+
+    .hero {
+        margin-top: 0;
+    }
+
+    .hero .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .hero .hero-text p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.65); /* aún más suave en móvil */
+    }
+
+    .btn-start {
+        padding: 12px 25px;
+        font-size: 18px;
+    }
 }

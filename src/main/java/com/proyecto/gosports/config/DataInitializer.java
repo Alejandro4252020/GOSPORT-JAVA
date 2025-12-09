@@ -17,7 +17,7 @@ public class DataInitializer {
             if (repo.findByUserName("admin").isEmpty()) {
                 Usuario admin = new Usuario();
                 admin.setUserName("admin");
-                admin.setPassword(new BCryptPasswordEncoder().encode("123"));
+                admin.setPassword(new BCryptPasswordEncoder().encode("Esteban1234"));
                 admin.setRol("ADMIN");
                 repo.save(admin);
                 System.out.println("✅ Usuario admin creado con éxito");

@@ -16,27 +16,32 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-               .requestMatchers(
-                "/",               
-                "/login",
-                "/paginaprincipal",
-                "/css/**",
-                "/js/**",
-                "/img/**",
-                "/productos/**"   //  <--- AGREGA ESTO
+                // Rutas públicas
+                .requestMatchers(
+                    "/",
+                    "/login",
+                    "/paginaprincipal",
+                    "/css/**",
+                    "/js/**",
+                    "/img/**",
+                    "/forgot-password/**",
+                    "/productos/**"
                 ).permitAll()
-
+                // Rutas solo ADMIN
                 .requestMatchers("/usuarios/**").hasRole("ADMIN")
-                .requestMatchers("/perfil/**").authenticated()
+                // Rutas autenticadas
+                .requestMatchers("/perfil/**", "/mi-perfil/**").authenticated()
+                // Cualquier otra ruta requiere autenticación
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
+                .defaultSuccessUrl("/home", false)
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/paginaprincipal")
                 .permitAll()
             )
             .exceptionHandling(exception -> exception
@@ -48,11 +53,15 @@ public class SecurityConfig {
                 .invalidSessionUrl("/login?expired")
                 .maximumSessions(1)
                 .expiredUrl("/login?expired")
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/h2-console/**")
             );
 
         return http.build();
     }
 
+    // Bean para encriptar contraseñas
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

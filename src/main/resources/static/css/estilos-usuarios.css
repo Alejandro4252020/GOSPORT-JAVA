@@ -1,5 +1,7 @@
 body {
-    background: linear-gradient(135deg, #d3e8ff, #f8fbff);
+    background: linear-gradient(135deg, #d5d8df);
+    background-color:#000000;
+    
 }
 
 h1 {
@@ -17,4 +19,49 @@ h1 {
 .btn-lg {
     font-size: 1.1rem;
     padding: 12px 18px;
+}
+/* ------------------------------
+   NAVBAR
+--------------------------------*/
+.navbar {
+    background: linear-gradient(90deg, #000000, #1b1b1b);
+    padding: 10px 0;
+}
+
+.navbar .navbar-brand span {
+    color: #ffffff;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #dbe9ff;
+    transform: translateY(-1px);
+}
+
+.navbar .btn-danger {
+    background-color: #ff4b4b;
+    border: none;
+}
+
+.navbar .btn-danger:hover {
+    background-color: #e63939;
+}
+/* -----------------------------
+   Footer
+----------------------------- */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 0;
+    font-size: 0.9em;
+    margin-top: 40px;
+    text-align: center;
 }
