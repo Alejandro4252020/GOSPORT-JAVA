@@ -12,6 +12,7 @@
 
     <!-- CSS PERSONAL -->
     <link rel="stylesheet" th:href="@{/css/perfil.css}">
+    <link rel="icon" type="image/png" href="/img/icono.jpg">
 </head>
 
 <body>
@@ -71,18 +72,18 @@
                 </div>
 
                 <div class="card shadow-sm p-4">
-                    <h3 class="text-center mb-4">Mi Perfil</h3>
+                    <h2 class="text-center mb-4">Mi Perfil</h2>
 
                     <!-- Formulario -->
                     <form th:action="@{/mi-perfil/editar}" method="post" enctype="multipart/form-data">
-                        <h2><mark></mark>Entonces, parcero, esta cuenta lo llama <span th:text="${usuario.userName}"></mark></span></h2><br>
+                        <h4>Entonces, parcero, esta cuenta se llama <span th:text="${usuario.userName}"></span></h4><br>
 
                         <!-- Foto de perfil -->
                         <div class="text-center mb-3">
                             <img th:src="@{'/uploads/' + ${usuario.fotoPerfil}}"
                                  alt="Foto de perfil"
-                                 width="120"
-                                 height="120"
+                                 width="150"
+                                 height="150"
                                  class="rounded-circle mb-2"
                                  onerror="this.src='/img/profile.jpg'">
                                  

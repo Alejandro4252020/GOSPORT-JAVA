@@ -1,0 +1,184 @@
+/* ------------------------------
+   ESTILOS GENERALES
+--------------------------------*/
+html, body {
+    height: 100%;      /* Importante para que el body ocupe toda la altura */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #d5d8df;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* El contenedor principal debe crecer para empujar el footer abajo */
+/* Aquí asumo que tu contenido está dentro de .container-perfil */
+/* 3. Contenido principal debe crecer para empujar footer abajo */
+.container-perfil {
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+/* ------------------------------
+   TABLAS DE RESERVAS
+--------------------------------*/
+.tabla-reservas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tabla-reservas th, .tabla-reservas td {
+    border: 1px solid #ccc;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.tabla-reservas th {
+    font-weight: 600;
+}
+
+.tabla-reservas tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* ------------------------------
+   FORMULARIOS
+--------------------------------*/
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* ------------------------------
+   BOTONES
+--------------------------------*/
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* ------------------------------
+   ENLACES
+--------------------------------*/
+a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.2s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* ------------------------------
+   MENSAJES
+--------------------------------*/
+.mensaje-exito {
+    color: green;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.mensaje-error {
+    color: red;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* ------------------------------
+   NAVBAR
+--------------------------------*/
+.navbar {
+    background: linear-gradient(90deg, #000000, #1b1b1b);
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .navbar-brand span {
+    color: #ffffff;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #dbe9ff;
+    transform: translateY(-1px);
+}
+
+.navbar .btn-danger {
+    background-color: #ff4b4b;
+    border: none;
+    border-radius: 4px;
+}
+
+.navbar .btn-danger:hover {
+    background-color: #e63939;
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+/* 4. Footer con flex-shrink para no encoger, margin-top auto para pegar abajo */
+footer {
+    background: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    margin-top: auto; /* esto empuja el footer hacia abajo */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    font-family: Arial, Helvetica, sans-serif;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Reserva</title>
+    <link rel="stylesheet" th:href="@{/css/estiloshyedit.css}">
+</head>
+<body>
+
+<h2>Editar Reserva</h2>
+
+<form th:action="@{'/reservas/editar/' + ${reserva.id}}" th:object="${reserva}" method="post">
+    <div class="form-grupo">
+        <label for="cancha">Cancha:</label>
+        <select id="cancha" name="cancha.id" required>
+            <option th:each="c : ${canchas}" th:value="${c.id}"
+                    th:text="${c.nombre}" th:selected="${c.id == reserva.cancha.id}"></option>
+        </select>
+    </div>
+
+    <div class="form-grupo">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" th:value="${reserva.fecha}" required>
+    </div>
+
+    <div class="form-grupo">
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" th:value="${reserva.hora}" required>
+    </div>
+
+    <div class="form-grupo">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" th:value="${reserva.telefono}" required>
+    </div>
+
+    <button type="submit">Guardar Cambios</button>
+    <a href="/reservas/historial">Cancelar</a>
+</form>
+
+</body>
+</html>

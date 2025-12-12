@@ -12,6 +12,7 @@
 
     <!-- ESTILOS PERSONALIZADOS -->
     <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="icon" type="image/png" href="/img/icono.jpg">
 </head>
 
 <body>
@@ -20,8 +21,18 @@
     <header class="topbar">
         <div class="topbar-content">
             <div class="logo-title">GoSports</div>
+            
+            <div>
+                <a href="/registrar" 
+                    style="color: white; text-decoration: none; margin-right: 20px; font-size: 16px;">
+                        Registrar
+                </a>
+            </div>
+
+
             <img th:src="@{/img/icono.jpg}" alt="Logo Gosports" class="topbar-logo">
         </div>
+        
     </header>
     
     <!-- CONTENEDOR PRINCIPAL -->

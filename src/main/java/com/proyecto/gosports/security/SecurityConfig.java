@@ -4,66 +4,118 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
+            // =======================
+            // CSRF
+            // =======================
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers(
+                    "/registrar",
+                    "/registrar/**",
+                    "/h2-console/**"
+                )
+            )
+
+            // =======================
+            // H2 FRAME OPTIONS
+            // =======================
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.disable())
+            )
+
+            // =======================
+            // AUTH RULES
+            // =======================
             .authorizeHttpRequests(auth -> auth
-                // Rutas públicas
+                // PÚBLICO
                 .requestMatchers(
-                    "/",
-                    "/login",
+                    "/", 
+                    "/login", 
                     "/paginaprincipal",
+                    "/registrar",
+                    "/registrar/**",
+                    "/forgot-password",
+                    "/reset-password",
                     "/css/**",
                     "/js/**",
                     "/img/**",
-                    "/forgot-password/**",
-                    "/productos/**"
+                    "/h2-console/**"
                 ).permitAll()
-                // Rutas solo ADMIN
-                .requestMatchers("/usuarios/**").hasRole("ADMIN")
-                // Rutas autenticadas
-                .requestMatchers("/perfil/**", "/mi-perfil/**").authenticated()
-                // Cualquier otra ruta requiere autenticación
+
+                // ADMIN
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                // PROTEGIDAS
+                .requestMatchers("/reservar-cancha").authenticated()
+                .requestMatchers("/reservas/**").authenticated()
+
+                // CUALQUIER OTRA REQUIERE LOGIN
                 .anyRequest().authenticated()
             )
+
+            // =======================
+            // LOGIN FORM
+            // =======================
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/home", false)
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/home", true)
+                .failureUrl("/login?error=true")
                 .permitAll()
             )
+
+            // =======================
+            // LOGOUT
+            // =======================
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/paginaprincipal")
+                .logoutSuccessUrl("/paginaprincipal?logout")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
                 .permitAll()
             )
-            .exceptionHandling(exception -> exception
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    response.sendRedirect("/login?denied");
-                })
-            )
-            .sessionManagement(session -> session
-                .invalidSessionUrl("/login?expired")
-                .maximumSessions(1)
-                .expiredUrl("/login?expired")
-            )
-            .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/h2-console/**")
-            );
+
+            // =======================
+            // USER DETAILS
+            // =======================
+            .userDetailsService(userDetailsService);
 
         return http.build();
     }
 
-    // Bean para encriptar contraseñas
+    // =======================
+    // PASSWORD ENCODER
+    // =======================
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    // =======================
+    // AUTH MANAGER
+    // =======================
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }

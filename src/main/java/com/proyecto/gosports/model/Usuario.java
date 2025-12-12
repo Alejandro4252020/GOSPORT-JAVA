@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +23,12 @@ public class Usuario {
     private String password;
 
     @Column(nullable = false)
-    private String rol; // Ej: ROLE_ADMIN, ROLE_USER
+    private String rol;
 
     @Column(nullable = true)
-    private String fotoPerfil; // Ruta o nombre de archivo de la foto
+    private String fotoPerfil;
+
+    @Column(nullable = false, unique = true)
+    private String email;  // <-- AGREGAR ESTO
 }
+

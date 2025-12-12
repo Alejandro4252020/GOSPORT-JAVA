@@ -11,7 +11,11 @@ public interface UsuarioRepository
 
     Optional<Usuario> findByUserName(String userName);
 
+    Optional<Usuario> findByEmail(String email);
+
     List<Usuario> findByUserNameContainingIgnoreCase(String userName);
 
     List<Usuario> findByRol(String rol);
+
+
 }

@@ -143,6 +143,16 @@ button:hover {
     .btn-volver:hover {
         background: #333333;
     }
+    .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 15px;
+    }
+
+    .nav-link:hover {
+        color: #dbe9ff;
+        transform: translateY(-1px);
+    }
 /* ===========================================
    FOOTER
 =========================================== */

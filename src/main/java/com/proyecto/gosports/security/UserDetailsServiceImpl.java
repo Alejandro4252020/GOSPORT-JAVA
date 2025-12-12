@@ -1,7 +1,6 @@
 package com.proyecto.gosports.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,15 +23,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         // Buscar usuario en BD
         Usuario usuario = usuarioRepository.findByUserName(username)
-        .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
-
-        // Convertir rol a formato válido para Spring Security
+        // Rol válido para Spring Security
         String rolSpring = "ROLE_" + usuario.getRol().toUpperCase();
 
-        return new User(
-                usuario.getUserName(),
-                usuario.getPassword(),
+        return new CustomUserDetails(
+                usuario,
                 Collections.singletonList(new SimpleGrantedAuthority(rolSpring))
         );
     }

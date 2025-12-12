@@ -47,6 +47,16 @@ body {
     border-radius: 12px;
 }
 
+btn btn-primary {
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
 /* Título */
 h1 {
     color: #2c3e50;

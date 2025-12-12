@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inicio</title>
+
+    <!-- BOOTSTRAP 5 -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
+
+    <!-- CSS PERSONAL -->
+    <link rel="stylesheet" th:href="@{/css/registrar.css}">
+    <link rel="icon" type="image/png" href="/img/icono.jpg">
+</head>
+
+<body>
+
+     <!-- BARRA SUPERIOR -->
+    <header class="topbar">
+        <div class="topbar-content">
+            <div class="logo-title">GoSports</div>
+            
+
+            <img th:src="@{/img/icono.jpg}" alt="Logo Gosports" class="topbar-logo">
+        </div>
+    </header>
+
+<h2>Crear Cuenta</h2>
+        <div class="text-center mt-4" style ="position: absolute; top: 80px; left: 15px;">
+                  <a href="/login" class="btn-volver">
+                       Volver
+                  </a>
+        </div>
+
+<form action="/registrar" method="post">
+
+    <label>Correo electrónico:</label>
+    <input type="email" name="email" required>
+
+
+    <label>Nombre de Usuario:</label>
+    <input type="text" name="userName" required><br>
+
+    <label>Contraseña:</label>
+    <input type="password" name="password" required><br>
+
+    <button type="submit">Registrar</button>
+</form>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<p th:if="${param.registrado}" style="color: green;">
+    ¡Tu cuenta ha sido creada con éxito! Ahora puedes iniciar sesión.
+</p>
+
+<p th:if="${param.error}" style="color: red;">
+    Usuario o contraseña incorrectos.
+</p>
+
+
+</body>
+</html>

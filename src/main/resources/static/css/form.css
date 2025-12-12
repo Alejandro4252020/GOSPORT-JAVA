@@ -1,0 +1,134 @@
+/* ============================
+   FONDO GENERAL
+============================ */
+body {
+    background-color: #d5d8df !important; /* azul claro */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================
+   TARJETA DEL FORMULARIO
+============================ */
+.card {
+    background-color: #ffffff !important; /* café grisáceo semitransparente */
+    border-radius: 15px !important;
+    color: #000000;
+}
+
+/* ============================
+   TÍTULO
+============================ */
+.card h3 {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* ============================
+   INPUTS
+============================ */
+.form-control, .form-select {
+    border-radius: 8px !important;
+    padding: 10px !important;
+    font-size: 15px;
+}
+
+.input-group .btn {
+    border-radius: 8px !important;
+}
+
+/* Cambiar color del borde al hacer focus */
+.form-control:focus, .form-select:focus {
+    border-color: #005eff;
+    box-shadow: 0 0 0 0.15rem rgba(0, 110, 255, 0.4);
+}
+
+/* ============================
+   BOTÓN GUARDAR
+============================ */
+.btn-primary {
+    background-color: #0066ff !important;
+    border: none !important;
+    padding: 12px !important;
+    font-size: 17px;
+    border-radius: 8px !important;
+    transition: 0.25s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #004fcc !important;
+}
+
+/* ============================
+   ALERTAS
+============================ */
+.alert {
+    border-radius: 10px !important;
+    font-size: 15px;
+}
+
+.alert i {
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+/* ------------------------------
+   NAVBAR
+--------------------------------*/
+.navbar {
+    background: linear-gradient(90deg, #000000, #1b1b1b);
+    padding: 10px 0;
+}
+
+.navbar .navbar-brand span {
+    color: #ffffff;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #dbe9ff;
+    transform: translateY(-1px);
+}
+
+.navbar .btn-danger {
+    background-color: #ff4b4b;
+    border: none;
+}
+
+.navbar .btn-danger:hover {
+    background-color: #e63939;
+}
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+footer {
+    background: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}   
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 500px) {
+    .card {
+        padding: 20px !important;
+        margin-top: 20px;
+    }
+}

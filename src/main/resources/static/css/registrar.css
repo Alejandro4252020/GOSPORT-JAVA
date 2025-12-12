@@ -1,0 +1,109 @@
+/* ======= GENERAL ======= */
+body {
+    background-color: #f3f5f8;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ======= TOPBAR ======= */
+.topbar {
+    background-color: #000;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.topbar-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+
+/* ======= FORMULARIO ======= */
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    font-weight: bold;
+}
+
+form {
+    width: 350px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+form input:focus {
+    border-color: #007bff;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+form button:hover {
+    background-color: #333;
+}
+
+
+/* ======= MENSAJES ======= */
+p {
+    text-align: center;
+    font-size: 16px;
+}
+.btn-volver {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #000000;
+    color: #ffffff !important;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+
+    .btn-volver:hover {
+        background: #333333;
+    }

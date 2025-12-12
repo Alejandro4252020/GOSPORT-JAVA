@@ -20,7 +20,7 @@ public class UsuarioController {
     private UsuarioRepository repo;
 
     // -----------------------------
-    // REDIRECCIONES GENERALES
+    // REDIRECCIONES GENERALES  
     // -----------------------------
     @GetMapping("/")
     public String redireccionRaiz() {
@@ -40,13 +40,6 @@ public class UsuarioController {
         return "paginaprincipal";
     }
 
-    @GetMapping("/home")
-    public String home(Authentication auth, Model model) {
-        if (auth != null) {
-            model.addAttribute("rol", auth.getAuthorities().toString());
-        }
-        return "home";
-    }
 
     // -----------------------------
     // LISTAR USUARIOS (ADMIN)
@@ -99,46 +92,42 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuarios/guardar")
-    public String guardar(@ModelAttribute Usuario usuario) {
+    public String guardar(@ModelAttribute Usuario usuario, Model model) {
+    
+        // Verificar si ya existe un usuario con ese nombre (excepto si es la edición del mismo)
+        if (usuario.getId() == null) { // nuevo usuario
+            if (repo.findByUserName(usuario.getUserName()).isPresent()) {
+                model.addAttribute("mensajeError", "El nombre de usuario ya existe.");
+                return "form"; // vuelve al formulario
+            }
+            if (repo.findByEmail(usuario.getEmail()).isPresent()) {
+                model.addAttribute("mensajeError", "El correo electrónico ya está registrado.");
+                return "form"; 
+            }
+        } else { // edición de usuario
+            Usuario existente = repo.findByUserName(usuario.getUserName())
+                    .filter(u -> !u.getId().equals(usuario.getId()))
+                    .orElse(null);
+            if (existente != null) {
+                model.addAttribute("mensajeError", "El nombre de usuario ya existe.");
+                return "form";
+            }
+            Usuario emailExistente = repo.findByEmail(usuario.getEmail())
+                    .filter(u -> !u.getId().equals(usuario.getId()))
+                    .orElse(null);
+            if (emailExistente != null) {
+                model.addAttribute("mensajeError", "El correo electrónico ya está registrado.");
+                return "form";
+            }
+        }
+    
+        // Guardar usuario con contraseña encriptada
         usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
         repo.save(usuario);
+    
+        model.addAttribute("mensajeExito", "Usuario guardado correctamente.");
         return "redirect:/usuarios";
     }
 
-    @GetMapping("/usuarios/editar/{id}")
-    public String editar(@PathVariable Long id, Model model) {
-        model.addAttribute("usuario", repo.findById(id).orElseThrow());
-        return "form";
-    }
 
-    @GetMapping("/usuarios/eliminar/{id}")
-    public String eliminar(@PathVariable Long id) {
-        repo.deleteById(id);
-        return "redirect:/usuarios";
-    }
-
-    // -----------------------------
-    // PERFIL DE USUARIO
-    // -----------------------------
-    @GetMapping("/perfil")
-    public String perfil(Model model, Authentication auth) {
-        if (auth != null) {
-            String username = auth.getName();
-            Usuario usuario = repo.findByUserName(username).orElseThrow();
-            model.addAttribute("usuario", usuario);
-        }
-        return "perfil";
-    }
-
-    @PostMapping("/perfil/guardar")
-    public String guardarPerfil(@ModelAttribute Usuario usuario, Authentication auth) {
-        if (auth != null) {
-            String username = auth.getName();
-            Usuario actual = repo.findByUserName(username).orElseThrow();
-            actual.setUserName(usuario.getUserName());
-            actual.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
-            repo.save(actual);
-        }
-        return "redirect:/perfil?actualizado";
-    }
 }

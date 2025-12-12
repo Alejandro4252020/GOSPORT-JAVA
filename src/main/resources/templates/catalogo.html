@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Catálogo </title>
+
+    <!-- BOOTSTRAP 5 -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
+
+    <!-- CSS PERSONAL -->
+    <link rel="stylesheet" th:href="@{/css/estilos-catalogo.css}">
+    <link rel="icon" type="image/png" href="/img/icono.jpg">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/home}">
+            <img th:src="@{/img/icono.jpg}" alt="Logo" class="me-2" style="height: 40px;">
+            <span class="fw-bold">GOSPORT</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Inicio</a>
+                </li>
+
+                <li class="nav-item"th:href="@{/canchas}">
+                        <a class="nav-link" th:href="@{/canchas}">Canchas</a>
+                </li>
+
+                <li class="nav-item"
+                    th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+                </li>
+
+                <li class="nav-item"
+                    th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="nav-link" th:href="@{/reportes/reservas}">Reservas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mi-perfil}">Mi Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button class="btn btn-danger ms-3" type="submit">Cerrar Sesión</button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- CONTENEDOR GENERAL -->
+<div class="page-wrapper">
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="content">
+
+        <h1 style="color:#000000; cursor:pointer;" onclick="sortByPrice()">
+            Tienda
+        </h1>
+
+        <!-- CARRUSEL -->
+        <section>
+            <div class="carousel">
+                <div class="carousel-track" id="track">
+                    <img th:src="@{/img/uniforme1.jpg}">
+                    <img th:src="@{/img/uniforme2.jpg}">
+                    <img th:src="@{/img/uniforme3.jpg}">
+                    <img th:src="@{/img/uniforme4.jpg}">
+                    <img th:src="@{/img/uniforme5.jpg}">
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTA DE PRODUCTOS -->
+        <div class="vertical-list" id="productList">
+
+            <!-- ========== CAMISETAS ========== -->
+            <div class="categoria-container">
+                <h2 class="categoria-titulo">Camisetas</h2>
+
+                <div class="producto-grid">
+
+                    <!-- PRODUCTO 1 -->
+                    <div class="card" data-price="85000" id="camisetas">
+                        <img th:src="@{/img/camisetafutsal.jpg}"
+                             onclick="openModal('/img/camisetafutsal.jpg','Camiseta Azul fresca','$85.000')">
+                        <div>
+                            <p>Camiseta deportiva fresca</p>
+                            <p class="price">$85.000</p>
+                        </div>
+                    </div>
+
+                    <!-- PRODUCTO 2 -->
+                    <div class="card" data-price="80000" id="camisetas">
+                        <img th:src="@{/img/Uniforme-Gambeta.jpg}"
+                             onclick="openModal('/img/Uniforme-Gambeta.jpg','Uniforme-Gambeta','$80.000')">
+                        <div>
+                            <p>Uniforme-Gambeta</p>
+                            <p class="price">$80.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== PANTALONETAS ========== -->
+            <div class="categoria-container">     
+                <h2 class="categoria-titulo">Pantalonetas</h2>
+
+                <div class="producto-grid">
+
+                    <div class="card" data-price="90000" id="pantalonetas">
+                        <img th:src="@{/img/pantaloneta1.jpg}"
+                             onclick="openModal('/img/pantaloneta1.jpg','Pantaloneta Blanca','$90.000')">
+                        <div>
+                            <p>Pantaloneta Blanca</p>
+                            <p class="price">$50.000</p>
+                        </div>
+                    </div>
+
+                    <div class="card" data-price="98000" id="pantalonetas">
+                        <img th:src="@{/img/pantaloneta2.jpg}"
+                             onclick="openModal('/img/pantaloneta2.jpg','Pantaloneta Negra','$98.000')">
+                        <div>
+                            <p>Pantaloneta ligera</p>
+                            <p class="price">$98.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== ZAPATILLAS ========== -->
+            <div class="categoria-container"> 
+                <h2 class="categoria-titulo">Zapatillas</h2>
+
+                <div class="producto-grid">
+
+                    <div class="card" data-price="92000" id="zapatillas">
+                        <img th:src="@{/img/tenisgambeta1.png}"
+                             onclick="openModal('/img/tenisgambeta1.png','Zapatillas rojas','$92.000')">
+                        <div>
+                            <p>Zapatillas Gamba</p>
+                            <p class="price">$92.000</p>
+                        </div>
+                    </div>
+
+                    <div class="card" data-price="110000" id="zapatillas">
+                        <img th:src="@{/img/GAMBETAJ7.png}"
+                             onclick="openModal('/img/GAMBETAJ7.png','Balón azul edición','$110.000')">
+                        <div>
+                            <p>Zapatillas Gamba J7</p>
+                            <p class="price">$110.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== BALONES ========== -->
+            <div class="categoria-container"> 
+                <h2 class="categoria-titulo">Balones</h2>
+
+                <div class="producto-grid">
+
+                    <div class="card" data-price="105000" id="balones">
+                        <img th:src="@{/img/BALON1.png}"
+                             onclick="openModal('/img/BALON1.png','Balón de Futsal','$105.000')">
+                        <div>
+                            <p>Balón de Futsal</p>
+                            <p class="price">$105.000</p>
+                        </div>
+                    </div>
+
+                    <div class="card" data-price="105000" id="balones">
+                        <img th:src="@{/img/BALON2.png}"
+                             onclick="openModal('/img/BALON2.png','Balón resistente','$105.000')">
+                        <div>
+                            <p>Balón de Fútbol resistente</p>
+                            <p class="price">$105.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== MALETAS ========== -->
+            <div class="categoria-container"> 
+                <h2 class="categoria-titulo">Maletas</h2>
+
+                <div class="producto-grid">
+
+                    <div class="card" data-price="105000" id="maletas">
+                        <img th:src="@{/img/Maleta-terciada.jpg}"
+                             onclick="openModal('/img/Maleta-terciada.jpg','Maleta deportiva','$105.000')">
+                        <div>
+                            <p>Maleta resistente</p>
+                            <p class="price">$105.000</p>
+                        </div>
+                    </div>
+
+                    <div class="card" data-price="105000" id="maletas">
+                        <img th:src="@{/img/morral1.jpg}"
+                             onclick="openModal('/img/morral1.jpg','Maleta deportiva','$105.000')">
+                        <div>
+                            <p>Maleta resistente</p>
+                            <p class="price">$105.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ========== MEDIAS ========== -->
+            <div class="categoria-container"> 
+                <h2 class="categoria-titulo">Medias</h2>
+
+                <div class="producto-grid">
+
+                    <div class="card" data-price="25000" id="medias">
+                        <img th:src="@{/img/media1.jpg}"
+                             onclick="openModal('/img/media1.jpg','Medias técnicas','$25.000')">
+                        <div>
+                            <p>Medias deportivas - cortas</p>
+                            <p class="price">$25.000</p>
+                        </div>
+                    </div>
+
+                    <div class="card" data-price="105000" id="medias">
+                        <img th:src="@{/img/medias2.png}"
+                             onclick="openModal('/img/medias2.png','Medias deportivas','$105.000')">
+                        <div>
+                            <p>Medias deportivas - largas</p>
+                            <p class="price">$105.000</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Categorías</h2>
+        <button class="category-btn" onclick="goToCat('camisetas')">Camisetas</button>
+        <button class="category-btn" onclick="goToCat('pantalonetas')">Pantalonetas</button>
+        <button class="category-btn" onclick="goToCat('zapatillas')">Zapatillas</button>
+        <button class="category-btn" onclick="goToCat('balones')">Balones</button>
+        <button class="category-btn" onclick="goToCat('maletas')">Maletas</button>
+        <button class="category-btn" onclick="goToCat('medias')">Medias</button>
+    </div>
+
+</div> <!-- CIERRE page-wrapper -->
+
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <img id="modalImg">
+        <h3 id="modalDesc"></h3>
+        <h2 id="modalPrice" style="color:#00e676"></h2>
+        <button class="carrito" onclick="closeModal()">Añadir al carrito</button>
+        <button class="close" onclick="closeModal()">Cerrar</button>
+    </div>
+</div>
+
+<script>
+/* CARRUSEL */
+const track = document.querySelector(".carousel-track");
+const imgs = track.querySelectorAll("img");
+imgs.forEach(img => track.appendChild(img.cloneNode(true)));
+
+/* MODAL */
+function openModal(img, desc, price) {
+    document.getElementById("modalImg").src = img;
+    document.getElementById("modalDesc").textContent = desc;
+    document.getElementById("modalPrice").textContent = price;
+    document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+/* CATEGORÍAS */
+function goToCat(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.offsetTop - 20, behavior: "smooth" });
+}
+
+/* ORDENAR POR PRECIO */
+function sortByPrice() {
+    const list = document.getElementById("productList");
+    const items = Array.from(list.children);
+    items.sort((a,b) => a.dataset.price - b.dataset.price);
+    items.forEach(i => list.appendChild(i));
+}
+</script>
+
+<!-- FOOTER -->
+<footer class="text-center py-3 mt-4">
+    <p>© 2025 GoSports - Sistema de gestión deportiva</p>
+</footer>
+
+</body>
+</html>
