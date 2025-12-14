@@ -1,21 +1,27 @@
 package com.proyecto.gosports.Controller;
+
+
 import com.proyecto.gosports.model.Producto;
 import com.proyecto.gosports.service.ProductoService;
+import com.proyecto.gosports.service.ReporteService;
 
-import org.springframework.ui.Model; 
-import org.springframework.web.bind.annotation.*; 
-import org.springframework.stereotype.Controller; 
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
+
     private final ProductoService servicio;
 
-    public ProductoController(ProductoService servicio) {
+    public ProductoController(ProductoService servicio, ReporteService reporteService) {
         this.servicio = servicio;
     }
 
+    // ===== CRUD =====
     @GetMapping
     public String listar(Model modelo) {
         modelo.addAttribute("productos", servicio.listar());
@@ -52,4 +58,13 @@ public class ProductoController {
         servicio.eliminar(id);
         return "redirect:/productos";
     }
+    @GetMapping("/detalle/{id}")
+    public String verDetalleProducto(@PathVariable Long id, Model model) {
+        Producto producto = servicio.obtenerPorId(id);
+        model.addAttribute("producto", producto);
+        return "tarjetaproducto";
+    }
+
+
+    
 }

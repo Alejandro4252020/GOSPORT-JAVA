@@ -1,6 +1,5 @@
 package com.proyecto.gosports.config;
 
-
 import com.proyecto.gosports.model.Usuario;
 import com.proyecto.gosports.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -14,13 +13,20 @@ public class DataInitializer {
     @Bean
     public CommandLineRunner initDatabase(UsuarioRepository repo) {
         return args -> {
-            if (repo.findByUserName("admin").isEmpty()) {
+
+            // 🔹 Usar username (NO username)
+            if (repo.findByUsername("admin").isEmpty()) {
+
                 Usuario admin = new Usuario();
-                admin.setUserName("admin");
+                admin.setUsername("admin");
                 admin.setPassword(new BCryptPasswordEncoder().encode("Esteban1234"));
-                admin.setRol("ADMIN");
+
+                // 🔹 Usar formato correcto de Spring Security
+                admin.setRol("ROLE_ADMIN");
+
                 repo.save(admin);
                 System.out.println("✅ Usuario admin creado con éxito");
+
             } else {
                 System.out.println("ℹ️ Usuario admin ya existe");
             }

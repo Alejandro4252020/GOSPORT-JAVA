@@ -51,7 +51,6 @@ body {
     background: #ffffffee;
     width: 100% !important;
     max-width: 1300px !important;   /* ✔ tarjeta más grande */
-    min-height: 950px !important;   /* ✔ ahora crece */
     padding: 35px !important;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
     animation: fadeIn 0.6s ease-in-out;
@@ -91,8 +90,8 @@ h2, h4 {
 }
 
 .cancha-card img {
-    width: 100%;
-    height: 180px;
+    width: 140%;
+    height: 210px;
     object-fit: cover;
     border-radius: 12px;
 }
@@ -121,8 +120,25 @@ h2, h4 {
     border: 1px solid #c9d8ff;
     border-radius: 15px;
     transition: 0.3s;
-    padding: 20px;
-    min-height: 300px; /* ✔ más grande */
+    padding: 10px;
+    max-width: 260px;   /* 🔽 ancho controlado */
+    margin: auto;
+}
+.product-img {
+    width: 100%;
+    object-fit: contain;  /* no se deforma */
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.product-card h6 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.product-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0;
 }
 
 
@@ -134,10 +150,12 @@ h2, h4 {
 
 .product-card img {
     width: 100%;
-    height: 160px;
-    object-fit: cover;
+    height: 110px;
+    object-fit: contain;
     border-radius: 10px;
+    
 }
+
 .text-success{
     color: #10c41f !important;
     font-weight: 700;

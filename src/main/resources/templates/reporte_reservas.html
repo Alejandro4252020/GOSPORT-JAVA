@@ -88,7 +88,7 @@
                 <tbody>
                     <tr th:each="reserva : ${reservas}">
                         <td th:text="${reserva.id}"></td>
-                        <td th:text="${reserva.cliente.userName}"></td>
+                        <td th:text="${reserva.cliente.username}"></td>
                     
                         <!-- FECHA -->
                         <td th:text="${#temporals.format(reserva.fecha, 'yyyy-MM-dd')}"></td>

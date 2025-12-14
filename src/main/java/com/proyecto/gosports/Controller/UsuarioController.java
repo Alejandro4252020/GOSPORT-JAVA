@@ -68,7 +68,7 @@ public class UsuarioController {
             }
 
             if (username != null && !username.isEmpty()) {
-                filtros.add(cb.like(cb.lower(root.get("userName")), "%" + username.toLowerCase() + "%"));
+                filtros.add(cb.like(cb.lower(root.get("username")), "%" + username.toLowerCase() + "%"));
             }
 
             if (rol != null && !rol.isEmpty()) {
@@ -96,7 +96,7 @@ public class UsuarioController {
     
         // Verificar si ya existe un usuario con ese nombre (excepto si es la edición del mismo)
         if (usuario.getId() == null) { // nuevo usuario
-            if (repo.findByUserName(usuario.getUserName()).isPresent()) {
+            if (repo.findByUsername(usuario.getUsername()).isPresent()) {
                 model.addAttribute("mensajeError", "El nombre de usuario ya existe.");
                 return "form"; // vuelve al formulario
             }
@@ -105,7 +105,7 @@ public class UsuarioController {
                 return "form"; 
             }
         } else { // edición de usuario
-            Usuario existente = repo.findByUserName(usuario.getUserName())
+            Usuario existente = repo.findByUsername(usuario.getUsername())
                     .filter(u -> !u.getId().equals(usuario.getId()))
                     .orElse(null);
             if (existente != null) {
@@ -128,6 +128,10 @@ public class UsuarioController {
         model.addAttribute("mensajeExito", "Usuario guardado correctamente.");
         return "redirect:/usuarios";
     }
-
+    @GetMapping("/debug-roles")
+    @ResponseBody
+    public Object debugRoles(Authentication auth) {
+        return auth.getAuthorities();
+    }
 
 }

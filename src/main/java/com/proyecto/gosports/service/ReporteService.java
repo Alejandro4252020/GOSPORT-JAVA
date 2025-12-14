@@ -20,7 +20,7 @@ public class ReporteService {
     // ===================================
     public void generarReportePlano(List<Usuario> lista, ServletOutputStream outputStream) throws IOException {
         for (Usuario u : lista) {
-            String linea = u.getId() + " | " + u.getUserName() + " | " + u.getRol() + "\n";
+            String linea = u.getId() + " | " + u.getUsername() + " | " + u.getRol() + "\n";
             outputStream.write(linea.getBytes());
         }
         outputStream.flush();
@@ -45,7 +45,7 @@ public class ReporteService {
             for (Usuario u : lista) {
                 Row row = sheet.createRow(rowIndex++);
                 row.createCell(0).setCellValue(u.getId());
-                row.createCell(1).setCellValue(u.getUserName());
+                row.createCell(1).setCellValue(u.getUsername());
                 row.createCell(2).setCellValue(u.getRol());
             }
 
@@ -77,7 +77,7 @@ public class ReporteService {
 
             for (Usuario u : lista) {
                 String linea = "ID: " + u.getId()
-                        + "   | Usuario: " + u.getUserName()
+                        + "   | Usuario: " + u.getUsername()
                         + "   | Rol: " + u.getRol();
 
                 document.add(new com.lowagie.text.Paragraph(linea, textoFont));

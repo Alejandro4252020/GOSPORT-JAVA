@@ -1,6 +1,5 @@
 package com.proyecto.gosports.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -9,31 +8,58 @@ public class Carrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private Integer usuarioId;
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
 
-    private Integer productoId;
+    @Column(name = "producto_id", nullable = false)
+    private Long productoId;
 
+    @Column(nullable = false)
     private Integer cantidad;
 
     public Carrito() {}
 
-    public Carrito(Integer usuarioId, Integer productoId, Integer cantidad) {
+    public Carrito(Long usuarioId, Long productoId, Integer cantidad) {
         this.usuarioId = usuarioId;
         this.productoId = productoId;
         this.cantidad = cantidad;
     }
 
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    // -----------------
+    // GETTERS & SETTERS
+    // -----------------
 
-    public Integer getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
+    public Long getId() {
+        return id;
+    }
 
-    public Integer getProductoId() { return productoId; }
-    public void setProductoId(Integer productoId) { this.productoId = productoId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Integer getCantidad() { return cantidad; }
-    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public Long getProductoId() {
+        return productoId;
+    }
+
+    public void setProductoId(Long productoId) {
+        this.productoId = productoId;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 }

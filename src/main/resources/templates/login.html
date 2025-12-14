@@ -85,8 +85,10 @@
                     Usuario o contraseña incorrectos
                 </div>
 
-                <div th:if="${param.logout}" class="alert alert-success text-center">
-                    Sesión cerrada correctamente
+                <div th:if="${param.logout}" class="alert alert-warning text-center">
+                 Tu nombre de usuario fue actualizado.
+                 <br>
+                 Por seguridad, inicia sesión nuevamente con tu nuevo usuario.
                 </div>
 
                 <div th:if="${param.denied}" class="alert alert-danger text-center">

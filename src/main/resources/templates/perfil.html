@@ -76,7 +76,7 @@
 
                     <!-- Formulario -->
                     <form th:action="@{/mi-perfil/editar}" method="post" enctype="multipart/form-data">
-                        <h4>Entonces, parcero, esta cuenta se llama <span th:text="${usuario.userName}"></span></h4><br>
+                        <h4>Entonces, parcero, esta cuenta se llama <span th:text="${usuario.username}"></span></h4><br>
 
                         <!-- Foto de perfil -->
                         <div class="text-center mb-3">
@@ -94,12 +94,12 @@
 
                         <!-- Nombre de usuario -->
                         <div class="mb-3">
-                            <label for="userName" class="form-label">Nombre de usuario</label>
+                            <label for="username" class="form-label">Nombre de usuario</label>
                             <input type="text"
-                                   id="userName"
-                                   name="userName"
+                                   id="username"
+                                   name="username"
                                    class="form-control"
-                                   th:value="${usuario.userName}"
+                                   th:value="${usuario.username}"
                                    required>
                         </div>
 

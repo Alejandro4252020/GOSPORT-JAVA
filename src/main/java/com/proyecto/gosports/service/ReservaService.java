@@ -117,7 +117,7 @@ public class ReservaService {
 
             for (Reserva r : reservas) {
                 table.addCell(r.getId().toString());
-                table.addCell(r.getCliente().getUserName());
+                table.addCell(r.getCliente().getUsername());
                 table.addCell(r.getFecha().toString());
                 table.addCell(r.getCancha().getNombre());
             }

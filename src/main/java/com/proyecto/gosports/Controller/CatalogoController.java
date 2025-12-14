@@ -22,7 +22,7 @@ public class CatalogoController {
 
         if (principal != null) {
             String username = principal.getName();  // obtiene el usuario logueado
-            Usuario usuario = usuarioRepository.findByUserName(username).orElse(null);
+            Usuario usuario = usuarioRepository.findByUsername(username).orElse(null);
 
             model.addAttribute("usuario", usuario);  // aquí lo mandamos al HTML
         }

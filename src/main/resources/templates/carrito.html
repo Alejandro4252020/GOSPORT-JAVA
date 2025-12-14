@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de Compras</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/detalle-cancha.css}">
+
+    <!-- ICONO -->
+    <link rel="icon" type="image/png" th:href="@{/img/icono.jpg}">
+</head>
+
+<body class="bg-light">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/home}">
+            <img th:src="@{/img/icono.jpg}" alt="Logo" class="me-2" style="height: 40px;">
+            <span class="fw-bold">GOSPORT</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Inicio</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" th:href="@{/reportes/reservas}">Reservas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/catalogo}">Tienda GS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/canchas}">Canchas</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('USER')">
+                    <a class="nav-link" th:href="@{/reservas/historial}">Mis Reservas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mi-perfil}">Mi Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button class="btn btn-danger ms-3" type="submit">Cerrar Sesión</button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container mt-4">
+
+    <h2 class="mb-4">Carrito de Cancha</h2>
+
+    <!-- CARRITO VACÍO -->
+    <div th:if="${#lists.isEmpty(carrito)}" class="alert alert-info">
+        Tu carrito está vacío.
+    </div>
+
+    <!-- CARRITO CON PRODUCTOS -->
+    <div th:if="${!#lists.isEmpty(carrito)}" class="card shadow p-4">
+
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th class="text-center">Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="c : ${carrito}"
+                th:if="${productos.containsKey(c.productoId.longValue())}">
+
+                <!-- IMAGEN -->
+                <td>
+                    <img th:src="@{/img/{img}(img=${productos[c.productoId.longValue()].imagen})}"
+                         class="img-fluid"
+                         style="max-height: 80px;"
+                         alt="Producto">
+                </td>
+
+                <!-- NOMBRE -->
+                <td th:text="${productos[c.productoId.longValue()].nombre}"></td>
+
+                <!-- PRECIO -->
+                <td th:text="${productos[c.productoId.longValue()].precio}"></td>
+
+                <!-- CANTIDAD -->
+                <td class="text-center">
+                    <form th:action="@{/carrito/reducir}" method="post" class="d-inline">
+                        <input type="hidden" name="productoId" th:value="${c.productoId}">
+                        <button class="btn btn-sm btn-outline-secondary">−</button>
+                    </form>
+
+                    <span class="mx-2 fw-bold" th:text="${c.cantidad}"></span>
+
+                    <form th:action="@{/carrito/agregar}" method="post" class="d-inline">
+                        <input type="hidden" name="productoId" th:value="${c.productoId}">
+                        <input type="hidden" name="cantidad" value="1">
+                        <button class="btn btn-sm btn-outline-success">+</button>
+                    </form>
+                </td>
+
+                <!-- SUBTOTAL -->
+                <td th:text="${productos[c.productoId.longValue()].precio * c.cantidad}"></td>
+
+                <!-- ELIMINAR -->
+                <td>
+                    <form th:action="@{/carrito/eliminar}" method="post">
+                        <input type="hidden" name="productoId" th:value="${c.productoId}">
+                        <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h4>Total: <span class="fw-bold" th:text="${total}"></span></h4>
+
+            <form th:action="@{/carrito/vaciar}" method="post">
+                <button class="btn btn-warning">Vaciar Carrito</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center py-3 mt-4 bg-white shadow-sm">
+    <p class="mb-0">© 2025 GoSports - Sistema de gestión deportiva</p>
+</footer>
+
+</body>
+</html>

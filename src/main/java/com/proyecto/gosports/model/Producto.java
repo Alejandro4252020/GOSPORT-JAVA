@@ -8,14 +8,27 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
     private Double precio;
+    private String imagen; // 👈 NUEVO
+    @Column(length = 500)
+    private String descripcion;
 
-    // Getters y Setters
+    // getters y setters
+    public String getDescripcion() {
+    return descripcion;
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+
+
 }

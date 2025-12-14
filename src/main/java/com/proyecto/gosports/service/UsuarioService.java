@@ -24,7 +24,7 @@ public class UsuarioService {
     }
 
     public Usuario getByUserName(String username) {
-        return usuarioRepository.findByUserName(username)
+        return usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con username: " + username));
     }
 
@@ -33,7 +33,7 @@ public class UsuarioService {
     // ---------------------------------------------------------
 
     public Optional<Usuario> findByUserName(String username) {
-        return usuarioRepository.findByUserName(username);
+        return usuarioRepository.findByUsername(username);
     }
 
     public Optional<Usuario> findByEmail(String email) {
@@ -54,7 +54,7 @@ public class UsuarioService {
         }
 
         if (username != null && !username.isEmpty()) {
-            return usuarioRepository.findByUserNameContainingIgnoreCase(username);
+            return usuarioRepository.findByUsernameContainingIgnoreCase(username);
         }
 
         if (rol != null && !rol.isEmpty()) {
@@ -63,4 +63,9 @@ public class UsuarioService {
 
         return usuarioRepository.findAll();
     }
+    public Usuario login(String email, String password) {
+    return usuarioRepository.findByEmail(email)
+            .filter(u -> u.getPassword().equals(password))
+            .orElse(null);
+}
 }

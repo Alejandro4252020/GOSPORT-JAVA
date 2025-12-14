@@ -38,41 +38,7 @@ public class ReporteUsuarioController {
         reporteService.generarReportePdf(lista, response.getOutputStream());
     }
 
-    // ===================================
-    // REPORTE EXCEL REAL (.xlsx)
-    // ===================================
-    @GetMapping("/usuarios/reporte/excel")
-    public void generarReporteExcel(
-            @RequestParam(required = false) Integer id,
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) String rol,
-            HttpServletResponse response) throws Exception {
-
-        List<Usuario> lista = usuarioService.buscarUsuarios(id, username, rol);
-
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=reporte_usuarios.xlsx");
-
-        reporteService.generarReporteExcel(lista, response.getOutputStream());
-    }
-
-    // ===================================
-    // REPORTE PLANO (.txt)
-    // ===================================
-    @GetMapping("/usuarios/reporte/plano")
-    public void generarReportePlano(
-            @RequestParam(required = false) Integer id,
-            @RequestParam(required = false) String username,
-            @RequestParam(required = false) String rol,
-            HttpServletResponse response) throws Exception {
-
-        List<Usuario> lista = usuarioService.buscarUsuarios(id, username, rol);
-
-        response.setContentType("text/plain");
-        response.setHeader("Content-Disposition", "attachment; filename=reporte_usuarios.txt");
-
-        reporteService.generarReportePlano(lista, response.getOutputStream());
-    }
+    
     // ===================================
 // REPORTE IMPRESIÓN HTML
 // ===================================

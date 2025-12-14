@@ -21,32 +21,40 @@ public class RegistroController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Mostrar formulario
     @GetMapping("/registrar")
     public String mostrarFormularioRegistro(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "registrar"; // <-- tu archivo registrar.html
+        return "registrar";
     }
 
-    // Procesar formulario
     @PostMapping("/registrar")
     public String registrarUsuario(@ModelAttribute Usuario usuario, Model model) {
 
-        // Validar si ya existe el username
-        if (usuarioRepository.findByUserName(usuario.getUserName()).isPresent()) {
+        if (usuarioRepository.findByUsername(usuario.getUsername()).isPresent()) {
             model.addAttribute("error", "El nombre de usuario ya está en uso");
             return "registrar";
         }
 
-        // Asignar rol por defecto
+        if (!passwordSegura(usuario.getPassword())) {
+            model.addAttribute(
+                "error",
+                "La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial."
+            );
+            return "registrar";
+        }
+
         usuario.setRol("USER");
-
-        // Encriptar contraseña
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-
-        // Guardar
         usuarioRepository.save(usuario);
 
         return "redirect:/login?registrado";
     }
+
+    // 🔐 MÉTODO FALTANTE
+    private boolean passwordSegura(String password) {
+        return password != null && password.matches(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$"
+        );
+    }
 }
+

@@ -2,14 +2,14 @@ package com.proyecto.gosports.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
@@ -30,66 +30,70 @@ public class SecurityConfig {
             // =======================
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers(
-                    "/registrar",
                     "/registrar/**",
                     "/h2-console/**"
                 )
             )
 
             // =======================
-            // H2 FRAME OPTIONS
+            // H2
             // =======================
             .headers(headers -> headers
                 .frameOptions(frame -> frame.disable())
             )
 
             // =======================
-            // AUTH RULES
+            // AUTORIZACIÓN
             // =======================
             .authorizeHttpRequests(auth -> auth
+
                 // PÚBLICO
                 .requestMatchers(
-                    "/", 
-                    "/login", 
+                    "/login",
                     "/paginaprincipal",
-                    "/registrar",
                     "/registrar/**",
                     "/forgot-password",
                     "/reset-password",
                     "/css/**",
                     "/js/**",
                     "/img/**",
+                    "/uploads/**",
                     "/h2-console/**"
                 ).permitAll()
 
-                // ADMIN
+
+                // PERFIL
+                .requestMatchers("/mi-perfil/**").authenticated()
+
+                // RESERVAS
+                .requestMatchers(
+                    "/reservar-cancha",
+                    "/reservas/**"
+                ).authenticated()
+
+               // ADMIN
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-
-                // PROTEGIDAS
-                .requestMatchers("/reservar-cancha").authenticated()
-                .requestMatchers("/reservas/**").authenticated()
-
-                // CUALQUIER OTRA REQUIERE LOGIN
                 .anyRequest().authenticated()
             )
 
             // =======================
-            // LOGIN FORM
+            // LOGIN
             // =======================
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home", true)
+                .defaultSuccessUrl("/home") // 🔥 CLAVE
                 .failureUrl("/login?error=true")
                 .permitAll()
             )
+
 
             // =======================
             // LOGOUT
             // =======================
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/paginaprincipal?logout")
+                .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .permitAll()
